@@ -33,6 +33,7 @@ public class MovieDataSourceFactory extends DataSource.Factory {
         return movieDataSource;
     }
 
+    //будем отправлять MovieDataSource объект в ViewModel как MutableLiveData
     public MutableLiveData<MovieDataSource> getMutableLiveData() {
         return mutableLiveData;
     }
