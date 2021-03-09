@@ -7,14 +7,16 @@ import android.os.Parcelable;
 import android.os.Parcelable.Creator;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.BindingAdapter;
-import androidx.databinding.library.baseAdapters.BR;
+import androidx.recyclerview.widget.DiffUtil;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.vitalii.movie.BR;
 import com.vitalii.movie.R;
 
 //if we want using binding, we need added for all getter annotation @Bindable, and after need to rebuild project
@@ -273,5 +275,19 @@ public class Result extends BaseObservable implements Parcelable
     public int describeContents() {
         return 0;
     }
+
+    public static final DiffUtil.ItemCallback<Result> CALLBACK =
+            new DiffUtil.ItemCallback<Result>() {
+                @Override
+                public boolean areItemsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+                    return oldItem.id == newItem.id;
+                }
+
+                //TODO -> сравнивать каждый атрибут двух объектов Result
+                @Override
+                public boolean areContentsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
+                    return true;
+                }
+            };
 
 }
